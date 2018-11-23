@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<excel-configuration>
+    
+	 <excel>
+        <id>HYKHLS_IMPORT</id>
+        <className>com.skyworth.fl.sjzx.vo.KhlsVo</className>
+        <startRow>1</startRow>
+        <description>VA客户零售数据导入</description>
+        <defaultConfig>true</defaultConfig>
+        <redirect>true</redirect>
+        <nextAction></nextAction>
+        <idField></idField>
+        <codeField></codeField>
+        <columns>
+            <column number="0" name="客户编码" field="khbh" type="java.lang.String" required="true" />
+            <column number="1" name="客户简称" field="khjc" type="java.lang.String" />
+            <column number="2"  name="门店编码" field="mdbh" type="java.lang.String" />
+            <column number="3" name="零售日期" field="lsrq" type="java.util.Date" required="true" />
+            <column number="4" name="销售类型" field="xslx" type="java.lang.String" required="true" />
+			<column number="5" name="商品型号" field="spxh" type="java.lang.String" required="true" />
+			<column number="6" name="零售数量" field="lssl" type="java.lang.Integer" required="true" /> 
+            <column number="7" name="库存底价" field="kcdj" type="java.lang.Double" required="true" /> 
+			<column number="8" name="零售价" field="lsj" type="java.lang.Double" required="true" />
+            <column number="9" name="零售限价" field="lsxj" type="java.lang.Double" />  
+            <column number="10" name="客户承担返利金额" field="khcdje" type="java.lang.Double" />
+            <column number="11" name="备注" field="bzxx" type="java.lang.String" />
+        </columns>
+    </excel>
+    
+    <excel>
+        <id>LSKHLS_IMPORT</id>
+        <className>com.skyworth.fl.sjzx.vo.KhlsVo</className>
+        <startRow>1</startRow>
+        <description>KA客户零售数据导入</description>
+        <defaultConfig>true</defaultConfig>
+        <redirect>true</redirect>
+        <nextAction></nextAction>
+        <idField></idField>
+        <codeField></codeField>
+        <columns>
+            <column number="0" name="客户编码" field="khbh" type="java.lang.String" required="true" />
+            <column number="1" name="客户简称" field="khjc" type="java.lang.String" />
+            <column number="2"  name="门店编号" field="mdbh" type="java.lang.String" />
+            <column number="3" name="零售日期" field="lsrq" type="java.util.Date" required="true" />
+            <column number="4" name="销售类型" field="xslx" type="java.lang.String" required="true" />
+			<column number="5" name="商品型号" field="spxh" type="java.lang.String" required="true" />
+			<column number="6" name="零售数量" field="lssl" type="java.lang.Integer" required="true" />  
+            <column number="7" name="库存底价" field="kcdj" type="java.lang.Double" required="true" />
+			<column number="8" name="零售价" field="lsj" type="java.lang.Double" required="true" />
+            <column number="9" name="零售限价" field="lsxj" type="java.lang.Double" />  
+            <column number="10" name="客户承担返利金额" field="khcdje" type="java.lang.Double" />
+            <column number="11" name="前台毛利额" field="qtmle" type="java.lang.Double" />
+            <column number="12" name="苏宁POS单号" field="posdh" type="java.lang.String" />
+            <column number="13" name="国美提货单号" field="thdh" type="java.lang.String" />
+            <column number="14" name="备注" field="bzxx" type="java.lang.String" />
+        </columns>
+    </excel>
+	
+	<excel>
+        <id>HYKHKCJJBC_IMPORT</id>
+        <className>com.skyworth.fl.sjzx.vo.KcjjbcVo</className>
+        <startRow>1</startRow>
+        <description>VA客户库存降价补差导入</description>
+        <defaultConfig>true</defaultConfig>
+        <redirect>true</redirect>
+        <nextAction></nextAction>
+        <idField></idField>
+        <codeField></codeField>
+        <columns>
+            <column number="0" name="客户编码" field="khbh" type="java.lang.String" required="true" />
+            <column number="1" name="客户简称" field="khjc" type="java.lang.String" />
+			<column number="2" name="签收日期" field="qsrq" type="java.util.Date" />
+			<column number="3" name="补差类型" field="bclx" type="java.lang.String" required="true" />
+			<column number="4" name="销售类型" field="xslx" type="java.lang.String" required="true" />
+			<column number="5" name="商品型号" field="spxh" type="java.lang.String" required="true" />
+			<column number="6" name="库存数量" field="kcsl" type="java.lang.Integer" required="true" />
+            <column number="7" name="库存底价" field="kcdj" type="java.lang.Double" required="true" />
+            <column number="8" name="现供价" field="xdj" type="java.lang.Double" required="true" />
+			<column number="9" name="备注信息" field="bzxx" type="java.lang.String" />
+        </columns>
+	</excel>
+	
+	<excel>
+        <id>LSKHKCJJBC_IMPORT</id>
+        <className>com.skyworth.fl.sjzx.vo.KcjjbcVo</className>
+        <startRow>1</startRow>
+        <description>KA客户库存降价补差导入</description>
+        <defaultConfig>true</defaultConfig>
+        <redirect>true</redirect>
+        <nextAction></nextAction>
+        <idField></idField>
+        <codeField></codeField>
+        <columns>
+            <column number="0" name="客户编码" field="khbh" type="java.lang.String" required="true" />
+            <column number="1" name="客户简称" field="khjc" type="java.lang.String" />
+			<column number="2" name="补差类型" field="bclx" type="java.lang.String" required="true" />
+			<column number="3" name="销售类型" field="xslx" type="java.lang.String" required="true" />
+			<column number="4" name="商品型号" field="spxh" type="java.lang.String" required="true" />
+			<column number="5" name="库存数量" field="kcsl" type="java.lang.Integer" required="true" />
+            <column number="6" name="库存底价" field="kcdj" type="java.lang.Double" required="true" />
+            <column number="7" name="现供价" field="xdj" type="java.lang.Double" required="true" />
+			<column number="8" name="备注信息" field="bzxx" type="java.lang.String" />
+        </columns>
+	</excel>
+	
+	<excel>
+        <id>KHJTH_IMPORT</id>
+        <className>com.skyworth.fl.sjzx.vo.KhjthVo</className>
+        <startRow>1</startRow>
+        <description>KA客户进退货数据导入</description>
+        <defaultConfig>true</defaultConfig>
+        <redirect>true</redirect>
+        <nextAction></nextAction>
+        <idField></idField>
+        <codeField></codeField>
+        <columns>
+            <column number="0" name="部门编码" field="bmid" type="java.lang.String" required="true" />
+            <column number="1" name="客户编码" field="khbh" type="java.lang.String" required="true" />
+            <column number="2" name="客户简称" field="khjc" type="java.lang.String" />
+			<column number="3"  name="进退货日期" field="jthrq" type="java.util.Date" required="true" />
+        	<column number="4"  name="销售类型" field="xslx" type="java.lang.String" required="true"/>
+			<column number="5" name="商品型号" field="spxh" type="java.lang.String" required="true" />
+        	<column number="6"  name="进退货数量" field="jthsl" type="java.lang.Integer" />
+			<column number="7"  name="固定扣点" field="gdkd" type="java.lang.Double" />
+			<column number="8"  name="单价（含税）" field="dj" type="java.lang.Double" />
+			<column number="9"  name="客户进退货金额（含税）" field="jthje" type="java.lang.Double" required="true" />
+			<column number="10" name="备注信息" field="bzxx" type="java.lang.String" />
+        </columns>
+	</excel>
+    
+    <excel>
+        <id>QGLSYQ_IMPORT</id>
+        <className>com.skyworth.fl.sjzx.vo.QglsyqVo</className>
+        <startRow>1</startRow>
+        <description>全国连锁用券数据导入</description>
+        <defaultConfig>true</defaultConfig>
+        <redirect>true</redirect>
+        <nextAction></nextAction>
+        <idField></idField>
+        <codeField></codeField>
+        <columns>
+            <column number="0" name="部门编码" field="bmid" type="java.lang.String" required="true" />
+            <column number="1" name="客户编码" field="khbh" type="java.lang.String" required="true" />
+            <column number="2" name="客户简称" field="khjc" type="java.lang.String" />
+            <column number="3"  name="门店编码" field="mdbh" type="java.lang.String" />
+            <column number="4" name="销售类型" field="xslx" type="java.lang.String" />
+            <column number="5" name="零售日期" field="lsrq" type="java.util.Date" required="true" />
+			<column number="6" name="商品型号" field="spxh" type="java.lang.String" required="true" />
+            <column number="7" name="销售台数" field="xsts" type="java.lang.Integer" required="true" />
+            <column number="8" name="用券金额" field="yqje" type="java.lang.Double" required="true" />
+            <column number="9" name="返利子项" field="flzx" type="java.lang.String" required="true" />
+            <column number="10" name="国美提货单号" field="thdh" type="java.lang.String" />
+            <column number="11" name="苏宁pos单号" field="posdh" type="java.lang.String" />
+            <column number="12" name="备注信息" field="bzxx" type="java.lang.String" />
+        </columns>
+    </excel>
+    
+    <excel>
+        <id>YDKC_IMPORT</id>
+        <className>com.skyworth.fl.sjzx.vo.YdkcVo</className>
+        <startRow>1</startRow>
+        <description>月底库存导入</description>
+        <defaultConfig>true</defaultConfig>
+        <redirect>true</redirect>
+        <nextAction></nextAction>
+        <idField></idField>
+        <codeField></codeField>
+        <columns>
+            <column number="0" name="部门编码" field="bmid" type="java.lang.String" required="true" />
+            <column number="1" name="客户编码" field="khbh" type="java.lang.String" required="true"/>
+            <column number="2" name="客户简称" field="khjc" type="java.lang.String" />
+        	<column number="3"  name="销售类型" field="xslx" type="java.lang.String" />
+			<column number="4"  name="库存日期" field="kcrq" type="java.util.Date"  required="true"/>
+            <column number="5" name="商品型号" field="spxh" type="java.lang.String"  required="true"/>
+			<column number="6"  name="库存数量" field="kcsl" type="java.lang.Integer"  required="true"/>
+			<column number="7"  name="库存底价" field="kcdj" type="java.lang.Double"  required="true"/>
+			<column number="8" name="备注" field="bzxx" type="java.lang.String" />        	
+        </columns>
+	</excel>
+    
+    <excel>
+        <id>QCKC_IMPORT</id>
+        <className>com.skyworth.fl.sjzx.vo.QckcVo</className>
+        <startRow>1</startRow>
+        <description>期初库存导入</description>
+        <defaultConfig>true</defaultConfig>
+        <redirect>true</redirect>
+        <nextAction></nextAction>
+        <idField></idField>
+        <codeField></codeField>
+        <columns>
+            <column number="0" name="客户编码" field="khbh" type="java.lang.String"  required="true"/>
+            <column number="1" name="客户简称" field="khjc" type="java.lang.String"/>
+			<column number="2"  name="库存日期" field="kcrq" type="java.util.Date"  required="true"/>
+        	<column number="3"  name="销售类型" field="xslx" type="java.lang.String"  required="true"/>
+            <column number="4" name="商品型号" field="spxh" type="java.lang.String"  required="true"/>
+			<column number="5"  name="库存数量" field="kcsl" type="java.lang.Integer"  required="true"/>
+			<column number="6"  name="库存底价" field="kcdj" type="java.lang.Double"  required="true"/>
+			<column number="7" name="备注" field="bzxx" type="java.lang.String" />        	
+        </columns>
+	</excel>
+    
+	<excel>
+        <id>KCPD_IMPORT</id>
+        <className>com.skyworth.fl.sjzx.vo.KcpdVo</className>
+        <startRow>1</startRow>
+        <description>库存盘点导入</description>
+        <defaultConfig>true</defaultConfig>
+        <redirect>true</redirect>
+        <nextAction></nextAction>
+        <idField></idField>
+        <codeField></codeField>
+        <columns>
+            <column number="0" name="客户编码" field="khbh" type="java.lang.String"  required="true"/>
+            <column number="1" name="客户简称" field="khjc" type="java.lang.String"/>
+        	<column number="2"  name="销售类型" field="xslx" type="java.lang.String"  required="true"/>
+            <column number="3" name="商品型号" field="spxh" type="java.lang.String"  required="true"/>
+			<column number="4"  name="调整数量" field="kcsl" type="java.lang.Integer"  required="true"/>
+			<column number="5"  name="库存底价" field="kcdj" type="java.lang.Double"  required="true"/>
+			<column number="6" name="备注" field="bzxx" type="java.lang.String" />        	
+        </columns>
+	</excel>
+	
+	<excel>
+        <id>HYKHTHJJBC_IMPORT</id>
+        <className>com.skyworth.fl.sjzx.vo.HykhthjjbcVo</className>
+        <startRow>1</startRow>
+        <description>VA客户提货降价补差导入</description>
+        <defaultConfig>true</defaultConfig>
+        <redirect>true</redirect>
+        <nextAction></nextAction>
+        <idField></idField>
+        <codeField></codeField>
+        <columns>
+			<column number="0" name="商品型号" field="spxh" type="java.lang.String" required="true" />
+            <column number="1" name="现供价" field="xgj" type="java.lang.Double" required="true" />
+			<column number="2" name="备注信息" field="bzxx" type="java.lang.String" />
+        </columns>
+	</excel>
+	
+	<excel>
+        <id>CYTZKB_IMPORT</id>
+        <className>com.skyworth.fl.sjzx.vo.CytzkbVo</className>
+        <startRow>1</startRow>
+        <description>差异调整库补数据导入</description>
+        <defaultConfig>true</defaultConfig>
+        <redirect>true</redirect>
+        <nextAction></nextAction>
+        <idField></idField>
+        <codeField></codeField>
+        <columns>
+			<column number="0" name="调整类型" field="cyyy" type="java.lang.String" required="true" />
+            <column number="1" name="调整数量" field="kcsl" type="java.lang.Integer" required="true" />
+			<column number="2" name="盘点单号" field="pddh" type="java.lang.String" required="true" />
+        </columns>
+	</excel>
+	
+	<excel>
+        <id>CYTZLS_IMPORT</id>
+        <className>com.skyworth.fl.sjzx.vo.CytzlsVo</className>
+        <startRow>1</startRow>
+        <description>差异调整零售数据导入</description>
+        <defaultConfig>true</defaultConfig>
+        <redirect>true</redirect>
+        <nextAction></nextAction>
+        <idField></idField>
+        <codeField></codeField>
+        <columns>
+			<column number="0" name="调整类型" field="cyyy" type="java.lang.String" required="true" />
+            <column number="1" name="调整数量" field="lssl" type="java.lang.Integer" required="true" />
+			<column number="2" name="零售单号" field="lsdh" type="java.lang.String" required="true" />
+        </columns>
+	</excel>
+	
+	<excel>
+        <id>KKMX_IMPORT</id>
+        <className>com.skyworth.fl.sjzx.vo.KkmxVo</className>
+        <startRow>1</startRow>
+        <description>扣款明细数据导入</description>
+        <defaultConfig>true</defaultConfig>
+        <redirect>true</redirect>
+        <nextAction></nextAction>
+        <idField></idField>
+        <codeField></codeField>
+        <columns>
+        	<column number="0" name="产业大类编码" field="cydlbm" type="java.lang.String" required="true" />
+            <column number="1" name="客户编码" field="khbh" type="java.lang.String" required="true" />
+            <column number="2" name="客户简称" field="khjc" type="java.lang.String" />
+            <column number="3" name="兑付金额" field="dfje" type="java.lang.Double" required="true" />
+            <column number="4" name="兑付期间开始" field="dfqjks" type="java.util.Date" required="true" />
+            <column number="5" name="兑付期间结束" field="dfqjjs" type="java.util.Date" required="true" />
+            <column number="6" name="返利子项" field="flzx" type="java.lang.String" required="true" />
+            <column number="7" name="备注信息" field="bzxx" type="java.lang.String" />
+        </columns>
+    </excel>
+    
+</excel-configuration>

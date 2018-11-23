@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skyworth.dashboard.dao.DpDao">
+
+	<resultMap id="baseResultMap" type="com.skyworth.dashboard.vo.DpVo" />
+	<resultMap id="numValResultMap" type="com.skyworth.dashboard.vo.NumberValueVo" />
+	<resultMap id="strValResultMap" type="com.skyworth.dashboard.vo.StringValueVo" />
+	<resultMap id="pieValResultMap" type="com.skyworth.dashboard.vo.PieValueVo" />
+	
+	<select id="selectYwbm" parameterType="Map" statementType="CALLABLE">
+		{call DB_CX.P_YWBM(
+			#{vo.qjlx,jdbcType=VARCHAR,mode=IN},
+			#{vo.qj,jdbcType=VARCHAR,mode=IN},
+			#{vo.sjly,jdbcType=VARCHAR,mode=IN},
+			#{vo.ywbm,jdbcType=VARCHAR,mode=IN},
+			#{listCcjgX,jdbcType=CURSOR,mode=OUT,javaType=ResultSet,resultMap=com.skyworth.dashboard.dao.DpDao.strValResultMap},
+			#{listCcjg1,jdbcType=CURSOR,mode=OUT,javaType=ResultSet,resultMap=com.skyworth.dashboard.dao.DpDao.numValResultMap},
+            #{listCcjg2,jdbcType=CURSOR,mode=OUT,javaType=ResultSet,resultMap=com.skyworth.dashboard.dao.DpDao.numValResultMap},
+            #{listCcjg3,jdbcType=CURSOR,mode=OUT,javaType=ResultSet,resultMap=com.skyworth.dashboard.dao.DpDao.numValResultMap},
+            #{listCcjg4,jdbcType=CURSOR,mode=OUT,javaType=ResultSet,resultMap=com.skyworth.dashboard.dao.DpDao.numValResultMap},
+            #{listCcjg5,jdbcType=CURSOR,mode=OUT,javaType=ResultSet,resultMap=com.skyworth.dashboard.dao.DpDao.numValResultMap},
+            #{listCcjg6,jdbcType=CURSOR,mode=OUT,javaType=ResultSet,resultMap=com.skyworth.dashboard.dao.DpDao.numValResultMap},
+            #{listXljgX,jdbcType=CURSOR,mode=OUT,javaType=ResultSet,resultMap=com.skyworth.dashboard.dao.DpDao.strValResultMap},
+            #{listXljgXl,jdbcType=CURSOR,mode=OUT,javaType=ResultSet,resultMap=com.skyworth.dashboard.dao.DpDao.numValResultMap},
+            #{listXljgYs,jdbcType=CURSOR,mode=OUT,javaType=ResultSet,resultMap=com.skyworth.dashboard.dao.DpDao.numValResultMap},
+            #{listDcX,jdbcType=CURSOR,mode=OUT,javaType=ResultSet,resultMap=com.skyworth.dashboard.dao.DpDao.strValResultMap},
+            #{listDcXlYs,jdbcType=CURSOR,mode=OUT,javaType=ResultSet,resultMap=com.skyworth.dashboard.dao.DpDao.numValResultMap},
+            #{listDcXlWc,jdbcType=CURSOR,mode=OUT,javaType=ResultSet,resultMap=com.skyworth.dashboard.dao.DpDao.numValResultMap},
+            #{listDcXlWcl,jdbcType=CURSOR,mode=OUT,javaType=ResultSet,resultMap=com.skyworth.dashboard.dao.DpDao.numValResultMap},
+            #{listDcXeYs,jdbcType=CURSOR,mode=OUT,javaType=ResultSet,resultMap=com.skyworth.dashboard.dao.DpDao.numValResultMap},
+            #{listDcXeWc,jdbcType=CURSOR,mode=OUT,javaType=ResultSet,resultMap=com.skyworth.dashboard.dao.DpDao.numValResultMap},
+            #{listDcXeWcl,jdbcType=CURSOR,mode=OUT,javaType=ResultSet,resultMap=com.skyworth.dashboard.dao.DpDao.numValResultMap},
+            #{listDcMllYs,jdbcType=CURSOR,mode=OUT,javaType=ResultSet,resultMap=com.skyworth.dashboard.dao.DpDao.numValResultMap},
+            #{listDcMllWc,jdbcType=CURSOR,mode=OUT,javaType=ResultSet,resultMap=com.skyworth.dashboard.dao.DpDao.numValResultMap},
+            #{listQDJG,jdbcType=CURSOR,mode=OUT,javaType=ResultSet,resultMap=com.skyworth.dashboard.dao.DpDao.pieValResultMap})
+		}
+	</select>
+	
+	<select id="selectFgs" parameterType="Map" statementType="CALLABLE">
+		{call DB_CX.P_FGS(
+			#{vo.qjlx,jdbcType=VARCHAR,mode=IN},
+			#{vo.qj,jdbcType=VARCHAR,mode=IN},
+			#{vo.sjly,jdbcType=VARCHAR,mode=IN},
+			#{vo.fgs,jdbcType=VARCHAR,mode=IN},
+			#{listWCL,jdbcType=CURSOR,mode=OUT,javaType=ResultSet,resultMap=com.skyworth.dashboard.dao.DpDao.baseResultMap},
+			#{listQsX,jdbcType=CURSOR,mode=OUT,javaType=ResultSet,resultMap=com.skyworth.dashboard.dao.DpDao.strValResultMap},
+            #{listQsXe,jdbcType=CURSOR,mode=OUT,javaType=ResultSet,resultMap=com.skyworth.dashboard.dao.DpDao.numValResultMap},
+            #{listQsMll,jdbcType=CURSOR,mode=OUT,javaType=ResultSet,resultMap=com.skyworth.dashboard.dao.DpDao.numValResultMap},
+            #{listQsXl,jdbcType=CURSOR,mode=OUT,javaType=ResultSet,resultMap=com.skyworth.dashboard.dao.DpDao.numValResultMap},
+            #{listQsJj,jdbcType=CURSOR,mode=OUT,javaType=ResultSet,resultMap=com.skyworth.dashboard.dao.DpDao.numValResultMap},
+            #{listXsjgX,jdbcType=CURSOR,mode=OUT,javaType=ResultSet,resultMap=com.skyworth.dashboard.dao.DpDao.strValResultMap},
+            #{listXsjgWc,jdbcType=CURSOR,mode=OUT,javaType=ResultSet,resultMap=com.skyworth.dashboard.dao.DpDao.numValResultMap},
+            #{listXsjgCj,jdbcType=CURSOR,mode=OUT,javaType=ResultSet,resultMap=com.skyworth.dashboard.dao.DpDao.numValResultMap},
+            #{listXsjgZb,jdbcType=CURSOR,mode=OUT,javaType=ResultSet,resultMap=com.skyworth.dashboard.dao.DpDao.numValResultMap},
+            #{listQDJG,jdbcType=CURSOR,mode=OUT,javaType=ResultSet,resultMap=com.skyworth.dashboard.dao.DpDao.baseResultMap})
+		}
+	</select>
+	
+	<select id="selectMap" parameterType="Map" statementType="CALLABLE">
+		{call DB_CX.P_FGS_DT(
+			#{vo.qjlx,jdbcType=VARCHAR,mode=IN},
+			#{vo.qj,jdbcType=VARCHAR,mode=IN},
+			#{vo.sjly,jdbcType=VARCHAR,mode=IN},
+			#{listXL,jdbcType=CURSOR,mode=OUT,javaType=ResultSet,resultMap=com.skyworth.dashboard.dao.DpDao.baseResultMap},
+			#{listXE,jdbcType=CURSOR,mode=OUT,javaType=ResultSet,resultMap=com.skyworth.dashboard.dao.DpDao.baseResultMap},
+			#{listDQ6,jdbcType=CURSOR,mode=OUT,javaType=ResultSet,resultMap=com.skyworth.dashboard.dao.DpDao.baseResultMap})
+		}
+	</select>
+    
+</mapper>

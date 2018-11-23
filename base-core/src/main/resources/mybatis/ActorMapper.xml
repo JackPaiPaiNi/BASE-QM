@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skyworth.core.actor.dao.ActorDao">
+
+	<resultMap id="baseResultMap" type="com.skyworth.core.actor.vo.ActorVo" >
+	
+		<result column="id" property="id" jdbcType="DECIMAL" />
+		<result column="gw" property="gw" jdbcType="VARCHAR" />
+		<result column="bzxx" property="bzxx" jdbcType="VARCHAR" />
+		<result column="zt" property="zt" jdbcType="DECIMAL" />
+	</resultMap>
+	
+	<select id="selectById" parameterType="Map" statementType="CALLABLE">
+		{call PKG_CORE_ACTOR.P_QRY_BY_ID(
+			#{id,jdbcType=DECIMAL,mode=IN},
+			#{list,jdbcType=CURSOR,mode=OUT,javaType=ResultSet,resultMap=com.skyworth.core.actor.dao.ActorDao.baseResultMap})
+		}
+	</select>
+    
+	<select id="select" parameterType="Map" statementType="CALLABLE">
+		{call PKG_CORE_ACTOR.P_QRY(
+			#{vo.gw,jdbcType=VARCHAR ,mode=IN },
+			#{vo.zt,jdbcType=DECIMAL,mode=IN},
+			#{page.page,jdbcType=DECIMAL,mode=IN},
+			#{page.rows,jdbcType=DECIMAL,mode=IN},
+			#{page.sort,jdbcType=VARCHAR,mode=IN},
+			#{page.order,jdbcType=VARCHAR,mode=IN},
+			#{total,jdbcType=INTEGER,mode=OUT},
+			#{list,jdbcType=CURSOR,mode=OUT,javaType=ResultSet,resultMap=com.skyworth.core.actor.dao.ActorDao.baseResultMap})
+		}
+	</select>
+	
+	<update id="save" parameterType="Map" statementType="CALLABLE">
+		{call PKG_CORE_ACTOR.P_SAVE(
+			#{vo.id,jdbcType=VARCHAR,mode=INOUT},
+			#{vo.gw,jdbcType=VARCHAR,mode=IN },
+			#{vo.bzxx,jdbcType=VARCHAR,mode=IN},
+			#{vo.zt,jdbcType=DECIMAL,mode=IN},
+			#{resultCode,jdbcType=VARCHAR,mode=OUT},
+			#{resultMsg,jdbcType=VARCHAR,mode=OUT}
+		)}
+	</update>
+	
+	<delete id="delete" parameterType="Map" statementType="CALLABLE">
+		{call PKG_CORE_ACTOR.P_DELETE(
+			#{vo.id,jdbcType=INTEGER,mode=IN},
+			#{resultCode,jdbcType=VARCHAR,mode=OUT},
+			#{resultMsg,jdbcType=VARCHAR,mode=OUT}
+		)}
+	</delete>
+	
+	<select id="selectMenuQx" parameterType="Map" statementType="CALLABLE">
+		{call PKG_CORE_ACTOR.P_QRY_MENU_QX(
+			#{gwid,jdbcType=DECIMAL,mode=IN},
+			#{list,jdbcType=CURSOR,mode=OUT,javaType=ResultSet,resultMap=com.skyworth.core.menu.dao.MenuDao.baseResultMap})
+		}
+	</select>
+	
+	<update id="saveQx" parameterType="Map" statementType="CALLABLE">
+		{call PKG_CORE_ACTOR.P_SAVE_QX(
+			#{gwid,jdbcType=DECIMAL,mode=IN},
+			#{cdid,jdbcType=CLOB,mode=IN},
+			#{qxid,jdbcType=CLOB,mode=IN},
+			#{resultCode,jdbcType=VARCHAR,mode=OUT},
+			#{resultMsg,jdbcType=VARCHAR,mode=OUT}
+		)}
+	</update>
+    
+</mapper>

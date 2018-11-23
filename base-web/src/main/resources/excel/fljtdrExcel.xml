@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<excel-configuration>
+    <excel>
+        <id>FLJTTZ_XSBL_IMPORT</id>
+        <className>com.skyworth.fl.fljt.vo.FljttzXsblVo</className>
+        <startRow>2</startRow>
+        <description>返利计提调整_销售补利数据导入</description>
+        <defaultConfig>true</defaultConfig>
+        <redirect>true</redirect>
+        <nextAction>/fljt/fljttz/list</nextAction>
+        <idField>id</idField>
+        <codeField>code</codeField>
+        <columns>
+            <column number="0" name="部门ID" field="bmid" type="java.lang.String"   required="true"/>
+            <column number="1" name="部门名称" field="bm" type="java.lang.String" required="false" />
+            <column number="2" name="产业大类编码" field="cydlbm" type="java.lang.String" required="true" />
+            <column number="3" name="客户编号" field="khbh" type="java.lang.String" required="true"/>
+            <column number="4" name="客户名称" field="khmc" type="java.lang.String" required="false"/>
+            <column number="5" name="兑付形式" field="dfxs" type="java.lang.String" required="true"/>
+            <column number="6" name="调整金额" field="tzje" type="java.lang.Double" required="true"/>
+            <column number="7" name="备注信息" field="bzxx" type="java.lang.String" required="false"/>
+        </columns>
+    </excel>
+
+    <excel>
+        <id>FLZXJT_IMPORT</id>
+        <className>com.skyworth.fl.fljt.vo.FlzxjtdMxVo</className>
+        <startRow>2</startRow>
+        <description>返利专项计提数据导入</description>
+        <defaultConfig>true</defaultConfig>
+        <redirect>true</redirect>
+        <nextAction></nextAction>
+        <idField>id</idField>
+        <codeField>code</codeField>
+        <columns>
+        	<column number="0" name="产业大类" field="cydlbm" type="java.lang.String" required="true"/>
+        	<column number="1" name="部门编码" field="bmid" type="java.lang.String" required="true"/>
+        	<column number="2" name="部门" field="bm" type="java.lang.String" />
+            <column number="3" name="客户编号" field="khbh" type="java.lang.String" required="true"/>
+            <column number="4" name="客户名称" field="khmc" type="java.lang.String" />
+            <column number="5" name="返利项目编码" field="flxmbm" type="java.lang.String" required="true" />
+            <column number="6" name="返利项目" field="flxm" type="java.lang.String"/>
+            <column number="7" name="返利子项编码" field="flzxbm" type="java.lang.String" required="true" />
+            <column number="8" name="返利子项" field="flzx" type="java.lang.String"/>
+            <column number="9" name="兑付形式" field="dfxs" type="java.lang.String" required="true" />
+            <column number="10" name="金额" field="je" type="java.lang.Double" required="true"/>
+            <column number="11" name="计提原因分类" field="jtyyfl" type="java.lang.String" required="true" />
+            <column number="12" name="备注信息" field="bzxx" type="java.lang.String" required="true" />
+        </columns>
+    </excel>
+    <excel>
+        <id>DSFLJT_XHL_IMPORT</id>
+        <className>com.skyworth.fl.fljt.vo.DsfljtdXhlmxVo</className>
+        <startRow>2</startRow>
+        <description>电商返利计_提型号_类数据导入</description>
+        <defaultConfig>true</defaultConfig>
+        <redirect>true</redirect>
+        <nextAction></nextAction>
+        <idField>id</idField>
+        <codeField>code</codeField>
+        <columns>
+            <column number="0" name="返利项目编码" field="flxmbm" type="java.lang.String" required="true" />
+            <column number="1" name="返利项目" field="flxm" type="java.lang.String"/>
+            <column number="2" name="返利子项编码" field="flzxbm" type="java.lang.String" required="true" />
+            <column number="3" name="返利子项" field="flzx" type="java.lang.String"/>
+            <!-- <column number="4" name="部门ID" field="bmid" type="java.lang.String" required="true"/>
+            <column number="5" name="部门" field="bm" type="java.lang.String"/> -->
+            <column number="4" name="产业大类编码" field="cydlbm" type="java.lang.String" required="true"/>
+            <column number="5" name="客户编号" field="khbh" type="java.lang.String" required="true"/>
+            <column number="6" name="客户名称" field="khmc" type="java.lang.String"/>
+            <column number="7" name="兑付形式" field="dfxs" type="java.lang.String" required="true"/>
+            <column number="8" name="商品型号" field="spxh" type="java.lang.String" required="true"/>
+            <column number="9" name="计提金额" field="jtje" type="java.lang.Double" required="true"/>
+            <column number="10" name="数量" field="sl" type="java.lang.Integer" required="true"/>
+            <column number="11" name="库存低价" field="kcdj" type="java.lang.Double" required="true"/>
+            <column number="12" name="现价" field="xj" type="java.lang.Double" required="true"/>
+            <column number="13" name="扣点调整金额" field="kdtzje" type="java.lang.Double" required="true"/>
+            <column number="14" name="备注信息" field="bzxx" type="java.lang.String"/>
+        </columns>
+    </excel>
+     <excel>
+        <id>DSFLJT_FXHL_IMPORT</id>
+        <className>com.skyworth.fl.fljt.vo.DsfljtdMxVo</className>
+        <startRow>2</startRow>
+        <description>电商返利计_非提型号_类数据导入</description>
+        <defaultConfig>true</defaultConfig>
+        <redirect>true</redirect>
+        <nextAction></nextAction>
+        <idField>id</idField>
+        <codeField>code</codeField>
+        <columns>
+            <column number="0" name="返利项目编码" field="flxmbm" type="java.lang.String" required="true" />
+            <column number="1" name="返利项目" field="flxm" type="java.lang.String"/>
+            <column number="2" name="返利子项编码" field="flzxbm" type="java.lang.String" required="true" />
+            <column number="3" name="返利子项" field="flzx" type="java.lang.String"/>
+            <!-- <column number="4" name="部门ID" field="bmid" type="java.lang.String" required="true"/>
+            <column number="5" name="部门" field="bm" type="java.lang.String"/> -->
+            <column number="4" name="产业大类编码" field="cydlbm" type="java.lang.String" required="true"/>
+            <column number="5" name="客户编号" field="khbh" type="java.lang.String" required="true"/>
+            <column number="6" name="客户名称" field="khmc" type="java.lang.String"/>
+            <column number="7" name="兑付形式" field="dfxs" type="java.lang.String" required="true"/>
+            <column number="8" name="计提金额" field="jtje" type="java.lang.Double" required="true"/>
+            <column number="9" name="计算基数" field="jsjs" type="java.lang.Double" required="true"/>
+            <column number="10" name="比率" field="bl" type="java.lang.Double" required="true"/>
+            <column number="11" name="备注信息" field="bzxx" type="java.lang.String"/>
+        </columns>
+    </excel>
+    
+    <excel>
+        <id>FLJT_JTBL_IMPORT</id>
+        <className>com.skyworth.fl.fljt.vo.FljtblVo</className>
+        <startRow>2</startRow>
+        <description>返利计提-返利计提比率导入</description>
+        <defaultConfig>true</defaultConfig>
+        <redirect>true</redirect>
+        <nextAction>/fljt/fljtbl/list</nextAction>
+        <idField>id</idField>
+        <codeField>code</codeField>
+        <columns>
+        	<column number="0" name="产业大类编码" field="cydlbm" type="java.lang.String" required="true" />
+            <column number="1" name="客户编号" field="khbh" type="java.lang.String" required="true"/>
+            <column number="2" name="客户名称" field="khmc" type="java.lang.String"/>
+            <column number="3" name="兑付形式" field="dfxs" type="java.lang.String" required="true"/>
+            <column number="4" name="返利子项" field="flzx" type="java.lang.String" required="true"/>
+            <column number="5" name="计提比率" field="jtbl" type="java.lang.Double" required="true"/>
+            <column number="6" name="计提开始时间" field="jtsjks" type="java.util.Date" required="true" />
+            <column number="7" name="备注信息" field="bzxx" type="java.lang.String" required="true"/>
+        </columns>
+    </excel>
+</excel-configuration>

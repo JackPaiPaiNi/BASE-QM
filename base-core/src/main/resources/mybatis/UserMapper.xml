@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skyworth.core.user.dao.UserDao">
+
+	<resultMap id="baseResultMap" type="com.skyworth.core.user.vo.UserVo" >
+	
+		<result column="gh" property="gh" jdbcType="VARCHAR" />
+		<result column="xm" property="xm" jdbcType="VARCHAR" />
+		<result column="bmid" property="bmid" jdbcType="VARCHAR" />
+		<result column="bm" property="bm" jdbcType="VARCHAR" />
+		<result column="hrzw" property="hrzw" jdbcType="VARCHAR" />
+		<result column="hrgw" property="hrgw" jdbcType="VARCHAR" />
+		<result column="ywlx" property="ywlx" jdbcType="VARCHAR" />
+		<result column="bmjc" property="bmjc" jdbcType="VARCHAR" />
+		<result column="mm" property="mm" jdbcType="VARCHAR" />
+		<result column="hrzt" property="hrzt" jdbcType="VARCHAR" />
+		<!-- 主岗位信息 -->
+		<result column="mrgwid" property="mrgwid" jdbcType="DECIMAL" />
+		<result column="mrgw" property="mrgw" jdbcType="VARCHAR" />
+		<result column="gwids" property="gwids" jdbcType="VARCHAR" />
+		<result column="cwgs" property="cwgs" jdbcType="VARCHAR" />
+		<result column="openid" property="openid" jdbcType="VARCHAR" />
+		
+	</resultMap>
+	
+	<select id="select" parameterType="Map" statementType="CALLABLE">
+		{call PKG_CORE_QUERY.P_QRY_USER(
+			<!-- #{vo.gh,jdbcType=VARCHAR,mode=IN}, -->
+			#{vo.xm,jdbcType=VARCHAR,mode=IN},
+			#{vo.bmid,jdbcType=VARCHAR,mode=IN},
+			#{page.page,jdbcType=DECIMAL,mode=IN},
+			#{page.rows,jdbcType=DECIMAL,mode=IN},
+			#{page.sort,jdbcType=VARCHAR,mode=IN},
+			#{page.order,jdbcType=VARCHAR,mode=IN},
+			#{total,jdbcType=INTEGER,mode=OUT},
+			#{list,jdbcType=CURSOR,mode=OUT,javaType=ResultSet,resultMap=com.skyworth.core.user.dao.UserDao.baseResultMap})
+		}
+	</select>
+	
+	<select id="selectByGh" parameterType="Map" statementType="CALLABLE">
+		{call PKG_CORE_QUERY.P_QRY_USER_BY_GH(
+			#{gh,jdbcType=VARCHAR,mode=IN},
+			#{list,jdbcType=CURSOR,mode=OUT,javaType=ResultSet,resultMap=com.skyworth.core.user.dao.UserDao.baseResultMap})
+		}
+	</select>
+	
+	<select id="selectByGw" parameterType="Map" statementType="CALLABLE">
+		{call PKG_CORE_QUERY.P_QRY_USER_BY_GW(
+			#{gwid,jdbcType=DECIMAL,mode=IN},
+			#{bmid,jdbcType=VARCHAR,mode=IN},
+			#{bsc,jdbcType=DECIMAL,mode=IN},
+			#{fgs,jdbcType=DECIMAL,mode=IN},
+			#{list,jdbcType=CURSOR,mode=OUT,javaType=ResultSet,resultMap=com.skyworth.core.user.dao.UserDao.baseResultMap})
+		}
+	</select>
+	
+	<select id="checkByGw" parameterType="Map" statementType="CALLABLE">
+		{call PKG_CORE_QUERY.P_CHK_USER_BY_GW(
+			#{gwid,jdbcType=DECIMAL,mode=IN},
+			#{bmid,jdbcType=VARCHAR,mode=IN},
+			#{bsc,jdbcType=DECIMAL,mode=IN},
+			#{fgs,jdbcType=DECIMAL,mode=IN},
+			#{isExists,jdbcType=INTEGER,mode=OUT}
+		)}
+	</select>
+	
+	<update id="save" parameterType="Map" statementType="CALLABLE">
+		<!-- 当参数类型为IN OUT时，mode=INOUT -->
+		{call PKG_CORE_ACTOR.P_SAVE_USER_ACTOR(
+			#{vo.gh,jdbcType=VARCHAR,mode=IN},
+			#{vo.gwids,jdbcType=VARCHAR,mode=IN},
+			#{resultCode,jdbcType=VARCHAR,mode=OUT},
+			#{resultMsg,jdbcType=VARCHAR,mode=OUT}
+		)}
+	</update>
+    
+</mapper>

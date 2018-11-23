@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skyworth.bi.mdm.dao.YhjzxxDao">
+
+	<resultMap id="baseResultMap" type="com.skyworth.bi.mdm.vo.YhjzxxVo" >
+		
+		<result column="id" property="id" jdbcType="VARCHAR" />
+		<result column="gh" property="gh" jdbcType="VARCHAR" />
+		<result column="xm" property="xm" jdbcType="VARCHAR" />
+		<result column="jzgwid" property="jzgwid" jdbcType="DECIMAL" />
+		<result column="jzgwmc" property="jzgwmc" jdbcType="VARCHAR" />
+		<result column="jzbmid" property="jzbmid" jdbcType="VARCHAR" />
+		<result column="jzbmmc" property="jzbmmc" jdbcType="VARCHAR" />
+		<result column="zdr" property="zdr" jdbcType="VARCHAR" />
+		<result column="zdrid" property="zdrid" jdbcType="VARCHAR" />
+		<result column="zdsj" property="zdsj" jdbcType="TIMESTAMP" />
+		<result column="zt" property="zt" jdbcType="DECIMAL" />
+		<result column="ztmc" property="ztmc" jdbcType="VARCHAR" />
+		<result column="sjc" property="sjc" jdbcType="VARCHAR" />
+		
+	</resultMap>
+	
+	<select id="select" parameterType="Map" statementType="CALLABLE">
+		{call PKG_MDM_YHJZXX.P_QUERY(
+			#{vo.xm,jdbcType=VARCHAR,mode=IN},
+			#{vo.zt,jdbcType=DECIMAL,mode=IN},
+			#{page.page,jdbcType=DECIMAL,mode=IN},
+			#{page.rows,jdbcType=DECIMAL,mode=IN},
+			#{page.sort,jdbcType=VARCHAR,mode=IN},
+			#{page.order,jdbcType=VARCHAR,mode=IN},
+			#{total,jdbcType=INTEGER,mode=OUT},
+			#{list,jdbcType=CURSOR,mode=OUT,javaType=ResultSet,resultMap=com.skyworth.bi.mdm.dao.YhjzxxDao.baseResultMap})
+		}
+	</select>
+	
+	<select id="selectJzbm" parameterType="Map" statementType="CALLABLE">
+		{call PKG_MDM_YHJZXX.P_QUERY_JZBM(
+			#{list,jdbcType=CURSOR,mode=OUT,javaType=ResultSet,resultMap=com.skyworth.bi.mdm.dao.YhjzxxDao.baseResultMap})
+		}
+	</select>
+	
+	<update id="save" parameterType="Map" statementType="CALLABLE">
+		<!-- 当参数类型为IN OUT时，mode=INOUT -->
+		{call PKG_MDM_YHJZXX.P_SAVE(
+			#{vo.id,jdbcType=VARCHAR,mode=IN},
+			#{vo.gh,jdbcType=VARCHAR,mode=IN},
+			#{vo.xm,jdbcType=VARCHAR,mode=IN},
+			#{vo.jzgwid,jdbcType=DECIMAL,mode=IN},
+			#{vo.jzgwmc,jdbcType=VARCHAR,mode=IN},
+			#{vo.jzbmid,jdbcType=VARCHAR,mode=IN},
+			#{vo.jzbmmc,jdbcType=VARCHAR,mode=IN},
+			#{vo.zdrid,jdbcType=VARCHAR,mode=IN},
+			#{vo.zdr,jdbcType=VARCHAR,mode=IN},
+			#{resultCode,jdbcType=VARCHAR,mode=OUT},
+			#{resultMsg,jdbcType=VARCHAR,mode=OUT}
+		)}
+	</update>
+	
+	<update id="cancel" parameterType="Map" statementType="CALLABLE">
+		<!-- 当参数类型为IN OUT时，mode=INOUT -->
+		{call PKG_MDM_YHJZXX.P_CANCEL(
+			#{vo.id,jdbcType=VARCHAR,mode=IN},
+			#{vo.sjc,jdbcType=VARCHAR,mode=IN},
+			#{resultCode,jdbcType=VARCHAR,mode=OUT},
+			#{resultMsg,jdbcType=VARCHAR,mode=OUT}
+		)}
+	</update>
+    
+</mapper>

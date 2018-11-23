@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/context 
+http://www.springframework.org/schema/context/spring-context.xsd 
+http://www.springframework.org/schema/task
+http://www.springframework.org/schema/task/spring-task.xsd">
+
+	<!-- quartz持久化存储 -->
+	<bean name="quartzScheduler"
+		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<!--可选，QuartzScheduler 启动时更新己存在的Job，这样就不用每次修改targetObject后删除qrtz_job_details表对应记录了 -->
+		<property name="overwriteExistingJobs" value="true" />
+		<!--必须的，QuartzScheduler 延时启动，应用启动完后 QuartzScheduler 再启动 -->
+		<property name="startupDelay" value="3" />
+		<!-- 设置自动启动 -->
+		<property name="autoStartup" value="true" />
+		
+		<!-- scheduler的名称 -->
+		<!-- <property name="schedulerName" value="FLClusterScheduler" /> -->
+		<!--也可以在quartz.properties中配置 -->
+		<property name="quartzProperties">
+			<props>
+				<!-- 可为任何值,用在jdbc jobstrore中来唯一标识实例，但是在所有集群中必须相同 -->
+				<prop key="org.quartz.scheduler.instanceName">ClusterScheduler</prop>
+				<!-- #AUTO即可，基于主机名和时间戳来产生实例ID 集群中的每一个实例都必须有一个唯一的"instance id",应该有相同的"scheduler 
+					instance name" -->
+				<prop key="org.quartz.scheduler.instanceId">AUTO</prop>
+				<!-- 禁用quartz软件更新 -->
+				<prop key="org.quartz.scheduler.skipUpdateCheck">true</prop>
+				<!-- 线程池配置 -->
+				<prop key="org.quartz.threadPool.class">org.quartz.simpl.SimpleThreadPool</prop>
+				<prop key="org.quartz.threadPool.threadCount">20</prop>
+				<prop key="org.quartz.threadPool.threadPriority">5</prop>
+				<!-- JobStore 配置 -->
+				<prop key="org.quartz.jobStore.misfireThreshold">120000</prop>
+				<prop key="org.quartz.jobStore.class">org.quartz.impl.jdbcjobstore.JobStoreTX</prop>
+				<!-- #JobStoreSupport 使用一个驱动代理来操作 trigger 和 job 的数据存储 -->
+				<prop key="org.quartz.jobStore.driverDelegateClass">org.quartz.impl.jdbcjobstore.oracle.OracleDelegate
+				</prop>
+				<!-- #若要设置为true，则将JobDataMaps中的值当作string -->
+				<prop key="org.quartz.jobStore.useProperties">false</prop>
+				<!-- #对应下方的数据源配置，与spring结合不需要这个配置 -->
+				<!-- <prop key="org.quartz.jobStore.dataSource">QRDS</prop> -->
+				<!-- <prop key="org.quartz.jobStore.tablePrefix">QRTZ_</prop> -->
+				<!-- 集群配置 -->
+				<prop key="org.quartz.jobStore.isClustered">true</prop>
+				<prop key="org.quartz.jobStore.clusterCheckinInterval">15000</prop>
+				<prop key="org.quartz.jobStore.maxMisfiresToHandleAtATime">1</prop>
+				<!-- 当事件的JVM终止后，在调度器上也将此事件终止 -->
+				<prop key="org.quartz.plugin.shutdownHook.class">org.quartz.plugins.management.ShutdownHookPlugin
+				</prop>
+				<prop key="org.quartz.plugin.shutdownHook.cleanShutdown">true</prop>
+			</props>
+		</property>
+		<!-- 把spring上下 文以key/value的方式存放在了quartz的上下文中了 -->
+		<property name="applicationContextSchedulerContextKey" value="applicationContext" />
+        <!-- spring 管理的service需要放到这里，才能够注入成功 -->
+		<property name="schedulerContextAsMap">
+			<map>
+				<description>schedulerContextAsMap</description>
+				<entry key="pzcsService" value-ref="pzcsService"/>
+			</map>
+		</property>
+		<property name="triggers">
+			<list>
+				<ref bean="jtflJobTrigger" />
+				<ref bean="flfyJobTrigger" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- 调度的配置开始 -->
+	<bean id="jtflJobTrigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="jtflJobDetail" />
+		<!-- 每2小时执行一次  -->
+		<property name="cronExpression" value="0 0 */2 * * ?" />
+	</bean>
+	<bean id="flfyJobTrigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="flfyJobDetail" />
+		<!-- 每2小时执行一次  -->
+		<property name="cronExpression" value="0 0 */2 * * ?" />
+	</bean>
+	<!-- 调度的配置结束 -->
+
+	<!-- job的配置开始 -->
+	<bean name="jtflJobDetail"
+		class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="jobClass" value="com.skyworth.fl.ncpz.job.JtflJob" />
+		<!-- 非spring管理的service放到这里，就可以注入进去 -->
+		<!-- <property name="jobDataMap">
+			<map>
+				<description>jobDataMap</description>
+				<entry key="pzService" value-ref="pzService" />
+			</map>
+		</property> -->
+		<property name="durability" value="true" />
+	</bean>
+	<bean id="flfyJobDetail"
+		class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="jobClass" value="com.skyworth.fl.ncpz.job.FlfyJob" />
+		<property name="durability" value="true" />
+	</bean>
+	<!-- job的配置结束 -->
+</beans>

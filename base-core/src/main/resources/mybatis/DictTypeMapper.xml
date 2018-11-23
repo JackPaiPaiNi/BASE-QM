@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skyworth.core.dict.dao.DictTypeDao">
+
+	<resultMap id="baseResultMap" type="com.skyworth.core.dict.vo.DictTypeVo" >
+	
+		<result column="id" property="id" jdbcType="VARCHAR" />
+		<result column="zdlxbm" property="zdlxbm" jdbcType="VARCHAR" />
+		<result column="zdlx" property="zdlx" jdbcType="VARCHAR" />
+		<result column="bzxx" property="bzxx" jdbcType="VARCHAR" />
+		<result column="zt" property="zt" jdbcType="DECIMAL" />
+
+	</resultMap>
+	
+	<select id="selectById" parameterType="Map" statementType="CALLABLE">
+		{call PKG_CORE_DICT.P_QRY_TYPE_BY_ID(
+			#{id,jdbcType=VARCHAR,mode=IN},
+			#{list,jdbcType=CURSOR,mode=OUT,javaType=ResultSet,resultMap=com.skyworth.core.dict.dao.DictTypeDao.baseResultMap})
+		}
+	</select>
+    
+	<select id="select" parameterType="Map" statementType="CALLABLE">
+		{call PKG_CORE_DICT.P_QRY_TYPE(
+			#{vo.zdlx,jdbcType=VARCHAR,mode=IN},
+			#{vo.zt,jdbcType=DECIMAL,mode=IN},
+			#{page.page,jdbcType=DECIMAL,mode=IN},
+			#{page.rows,jdbcType=DECIMAL,mode=IN},
+			#{page.sort,jdbcType=VARCHAR,mode=IN},
+			#{page.order,jdbcType=VARCHAR,mode=IN},
+			#{total,jdbcType=INTEGER,mode=OUT},
+			#{list,jdbcType=CURSOR,mode=OUT,javaType=ResultSet,resultMap=com.skyworth.core.dict.dao.DictTypeDao.baseResultMap})
+		}
+	</select>
+	
+	<update id="save" parameterType="Map" statementType="CALLABLE">
+		<!-- 当参数类型为IN OUT时，mode=INOUT -->
+		{call PKG_CORE_DICT.P_SAVE_TYPE(
+			#{vo.id,jdbcType=VARCHAR,mode=INOUT},
+			#{vo.zdlxbm,jdbcType=VARCHAR,mode= IN },
+			#{vo.zdlx,jdbcType=VARCHAR,mode=INOUT},
+			#{vo.bzxx,jdbcType=VARCHAR,mode=IN},
+			#{vo.zt,jdbcType=DECIMAL,mode=IN},
+			#{resultCode,jdbcType=VARCHAR,mode=OUT},
+			#{resultMsg,jdbcType=VARCHAR,mode=OUT}
+		)}
+	</update>
+	
+	<delete id="delete" parameterType="Map" statementType="CALLABLE">
+		{call PKG_CORE_DICT.P_DELETE_TYPE(
+			#{vo.id,jdbcType=VARCHAR,mode=IN},
+			#{resultCode,jdbcType=VARCHAR,mode=OUT},
+			#{resultMsg,jdbcType=VARCHAR,mode=OUT}
+		)}
+	</delete>
+    
+</mapper>

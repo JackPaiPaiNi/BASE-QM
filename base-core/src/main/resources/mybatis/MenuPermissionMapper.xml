@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skyworth.core.menu.dao.MenuPermissionDao">
+
+	<resultMap id="baseResultMap" type="com.skyworth.core.menu.vo.MenuPermissionVo" >
+	
+		<result column="id" property="id" jdbcType="VARCHAR" />
+		<result column="cdid" property="cdid" jdbcType="DECIMAL" />
+		<result column="qxbm" property="qxbm" jdbcType="VARCHAR" />
+		<result column="qx" property="qx" jdbcType="VARCHAR" />
+		<result column="xh" property="xh" jdbcType="DECIMAL" />
+		<result column="bzxx" property="bzxx" jdbcType="VARCHAR" />
+
+	</resultMap>
+	
+	<select id="selectById" parameterType="Map" statementType="CALLABLE">
+		{call PKG_CORE_MENU.P_QRY_QX_BY_ID(
+			#{id,jdbcType=VARCHAR,mode=IN},
+			#{list,jdbcType=CURSOR,mode=OUT,javaType=ResultSet,resultMap=com.skyworth.core.menu.dao.MenuPermissionDao.baseResultMap})
+		}
+	</select>
+    
+	<select id="select" parameterType="Map" statementType="CALLABLE">
+		{call PKG_CORE_MENU.P_QRY_QX(
+			#{vo.cdid,jdbcType=DECIMAL,mode=IN},
+			#{page.page,jdbcType=DECIMAL,mode=IN},
+			#{page.rows,jdbcType=DECIMAL,mode=IN},
+			#{page.sort,jdbcType=VARCHAR,mode=IN},
+			#{page.order,jdbcType=VARCHAR,mode=IN},
+			#{total,jdbcType=INTEGER,mode=OUT},
+			#{list,jdbcType=CURSOR,mode=OUT,javaType=ResultSet,resultMap=com.skyworth.core.menu.dao.MenuPermissionDao.baseResultMap})
+		}
+	</select>
+	
+	<update id="save" parameterType="Map" statementType="CALLABLE">
+		<!-- 当参数类型为IN OUT时，mode=INOUT -->
+		{call PKG_CORE_MENU.P_SAVE_QX(
+			#{vo.id,jdbcType=VARCHAR,mode=INOUT},
+			#{vo.cdid,jdbcType=DECIMAL,mode=IN},
+			#{vo.qxbm,jdbcType=VARCHAR,mode=IN},
+			#{vo.qx,jdbcType=VARCHAR,mode=IN},
+			#{vo.xh,jdbcType=DECIMAL,mode=IN},
+			#{vo.bzxx,jdbcType=VARCHAR,mode=IN},
+			#{resultCode,jdbcType=VARCHAR,mode=OUT},
+			#{resultMsg,jdbcType=VARCHAR,mode=OUT}
+		)}
+	</update>
+	
+	<delete id="delete" parameterType="Map" statementType="CALLABLE">
+		{call PKG_CORE_MENU.P_DELETE_QX(
+			#{vo.id,jdbcType=VARCHAR,mode=IN},
+			#{resultCode,jdbcType=VARCHAR,mode=OUT},
+			#{resultMsg,jdbcType=VARCHAR,mode=OUT}
+		)}
+	</delete>
+    
+</mapper>

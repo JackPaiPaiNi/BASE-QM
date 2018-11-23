@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skyworth.core.dict.dao.DictDao">
+
+	<resultMap id="baseResultMap" type="com.skyworth.core.dict.vo.DictVo" >
+	
+		<result column="id" property="id" jdbcType="VARCHAR" />
+		<result column="bm" property="bm" jdbcType="VARCHAR" />
+		<result column="mc" property="mc" jdbcType="VARCHAR" />
+		<result column="zdlxbm" property="zdlxbm" jdbcType="VARCHAR" />
+		<result column="zdlx" property="zdlx" jdbcType="VARCHAR" />
+		<result column="xh" property="xh" jdbcType="VARCHAR" />
+		<result column="bzxx" property="bzxx" jdbcType="VARCHAR" />
+		<result column="zt" property="zt" jdbcType="DECIMAL" />
+
+	</resultMap>
+    
+    <select id="selectById" parameterType="Map" statementType="CALLABLE">
+		{call PKG_CORE_DICT.P_QRY_DICT_BY_ID(
+			#{id,jdbcType=VARCHAR,mode=IN},
+			#{list,jdbcType=CURSOR,mode=OUT,javaType=ResultSet,resultMap=com.skyworth.core.dict.dao.DictDao.baseResultMap})
+		}
+	</select>
+    
+	<select id="select" parameterType="Map" statementType="CALLABLE">
+		{call PKG_CORE_DICT.P_QRY_DICT(
+			#{vo.zdlxbm,jdbcType=VARCHAR,mode=IN},
+			#{vo.zdlx,jdbcType=VARCHAR,mode=IN},
+			#{vo.mc,jdbcType=VARCHAR,mode=IN},
+			#{vo.zt,jdbcType=VARCHAR,mode=IN},
+			#{page.page,jdbcType=DECIMAL,mode=IN},
+			#{page.rows,jdbcType=DECIMAL,mode=IN},
+			#{page.sort,jdbcType=VARCHAR,mode=IN},
+			#{page.order,jdbcType=VARCHAR,mode=IN},
+			#{total,jdbcType=INTEGER,mode=OUT},
+			#{list,jdbcType=CURSOR,mode=OUT,javaType=ResultSet,resultMap=com.skyworth.core.dict.dao.DictDao.baseResultMap})
+		}
+	</select>
+	
+	<update id="save" parameterType="Map" statementType="CALLABLE">
+		<!-- 当参数类型为IN OUT时，mode=INOUT -->
+		{call PKG_CORE_DICT.P_SAVE_DICT(
+			#{vo.id,jdbcType=VARCHAR,mode=INOUT},
+			#{vo.bm,jdbcType=VARCHAR,mode=IN},
+			#{vo.mc,jdbcType=VARCHAR,mode=IN},
+			#{vo.zdlxbm,jdbcType=VARCHAR,mode=IN},
+			#{vo.xh,jdbcType=VARCHAR,mode=IN},
+			#{vo.bzxx,jdbcType=VARCHAR,mode=IN},
+			#{vo.zt,jdbcType=DECIMAL,mode=IN},
+			#{resultCode,jdbcType=VARCHAR,mode=OUT},
+			#{resultMsg,jdbcType=VARCHAR,mode=OUT}
+		)}
+	</update>
+	
+	<delete id="delete" parameterType="Map" statementType="CALLABLE">
+		{call PKG_CORE_DICT.P_DELETE_DICT(
+			#{vo.id,jdbcType=VARCHAR,mode=IN},
+			#{resultCode,jdbcType=VARCHAR,mode=OUT},
+			#{resultMsg,jdbcType=VARCHAR,mode=OUT}
+		)}
+	</delete>
+    
+</mapper>

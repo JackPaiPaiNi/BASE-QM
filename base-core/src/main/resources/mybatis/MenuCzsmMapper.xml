@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skyworth.core.menu.dao.MenuCzsmDao">
+
+	<resultMap id="baseResultMap" type="com.skyworth.core.menu.vo.MenuCzsmVo" >	
+		<result column="id" property="id" jdbcType="VARCHAR" />
+		<result column="cd" property="cd" jdbcType="VARCHAR" />
+		<result column="czsm" property="czsm" jdbcType="CLOB" />
+		<result column="zdrid" property="zdrid" jdbcType="VARCHAR" />
+		<result column="zdr" property="zdr" jdbcType="VARCHAR" />
+		<result column="zdsj" property="zdsj" jdbcType="TIMESTAMP" />
+	</resultMap>
+	
+	<select id="selectById" parameterType="Map" statementType="CALLABLE">
+		{call PKG_CORE_MENU.P_QRY_CZSM_BY_ID(
+			#{id,jdbcType=VARCHAR,mode=IN},
+			#{list,jdbcType=CURSOR,mode=OUT,javaType=ResultSet,resultMap=com.skyworth.core.menu.dao.MenuCzsmDao.baseResultMap})
+		}
+	</select>
+	
+	<update id="save" parameterType="Map" statementType="CALLABLE">
+		<!-- 当参数类型为IN OUT时，mode=INOUT -->
+		{call PKG_CORE_MENU.P_SAVE_CZSM(
+			#{vo.id,jdbcType=VARCHAR,mode=IN},
+			#{vo.czsm,jdbcType=CLOB,mode=IN},
+		    #{vo.zdrid,jdbcType=VARCHAR,mode=IN},
+		    #{vo.zdr,jdbcType=VARCHAR,mode=IN},
+			#{resultCode,jdbcType=VARCHAR,mode=OUT},
+			#{resultMsg,jdbcType=VARCHAR,mode=OUT}
+		)}
+	</update>
+</mapper>

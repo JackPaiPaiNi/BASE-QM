@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<excel-configuration>
+    <excel>
+        <id>TY_IMPORT</id>
+        <className>com.skyworth.fl.flzc.zczd.vo.ZczdxhlmxVo</className>
+        <startRow>2</startRow>
+        <description>通用型号类导入</description>
+        <defaultConfig>true</defaultConfig>
+        <redirect>true</redirect>
+        <nextAction></nextAction>
+        <idField>id</idField>
+        <codeField>code</codeField>
+        <columns>
+            <column number="0" name="产品型号" field="spxh" type="java.lang.String"   required="true"/>
+            <column number="1" name="目标值" field="mbz" type="java.lang.Double" />
+            <column number="2" name="奖励点位" field="jlbz" type="java.lang.Double" />
+            <column number="3" name="补差期限" field="bcqx" type="java.lang.Double" />
+        </columns>
+    </excel>
+
+</excel-configuration>

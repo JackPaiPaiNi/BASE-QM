@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+  version="2.0">
+    
+  <description>JSTL 1.1 functions library</description>
+  <display-name>JSTL functions sys</display-name>
+  <tlib-version>1.1</tlib-version>
+  <short-name>fns</short-name>
+  <uri>http://java.sun.com/jsp/jstl/functionss</uri>
+
+  <function>
+    <description>获取字典对象HTML</description>
+    <name>loadDictOption</name>
+    <function-class>com.skyworth.core.utils.DictUtils</function-class>
+    <function-signature>java.lang.String loadDictOption(java.lang.String)</function-signature>
+    <example>${fns:loadDictOption(type)}</example>
+  </function>
+  <function>
+    <description>获取字典对象HTML（有默认值）</description>
+    <name>loadDictDefOption</name>
+    <function-class>com.skyworth.core.utils.DictUtils</function-class>
+    <function-signature>java.lang.String loadDictOption(java.lang.String, java.lang.String)</function-signature>
+    <example>${fns:loadDictOption(type, defValue)}</example>
+  </function>
+  <function>
+    <description>获取字典对象JSON</description>
+    <name>loadDictJson</name>
+    <function-class>com.skyworth.core.utils.DictUtils</function-class>
+    <function-signature>java.lang.String loadDictJson(java.lang.String)</function-signature>
+    <example>${fns:loadDictJson(type)}</example>
+  </function>
+  
+  
+  <function>
+    <description>获取渠道对象HTML</description>
+    <name>loadQdOption</name>
+    <function-class>com.skyworth.fl.utils.SelectUtils</function-class>
+    <function-signature>java.lang.String loadQdOption()</function-signature>
+    <example>${fns:loadQdOption()}</example>
+  </function>
+  
+</taglib>

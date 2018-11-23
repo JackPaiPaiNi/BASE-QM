@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<excel-configuration>
+    <excel>
+        <id>FLSB_QGJDLSYQTZ_IMPORT</id>
+        <className>com.skyworth.fl.flsb.vo.QgjdlsyqtzVo</className>
+        <startRow>1</startRow>
+        <description>全国家电连锁用券调整导入</description>
+        <defaultConfig>true</defaultConfig>
+        <redirect>true</redirect>
+        <nextAction>flsb/qgjdlsyqtz/list</nextAction>
+        <idField>id</idField>
+        <codeField>code</codeField>
+        <columns>
+            <column number="0" name="门店编号" field="mdbh"  type="java.lang.String"/>
+            <column number="1" name="门店名称" field="mdmc"  type="java.lang.String"/>
+            <column number="2" name="提货单号" field="thdh"  type="java.lang.String"/>
+            <column number="3" name="pos单号" field="posdh" type="java.lang.String"/>
+            <column number="4" name="零售日期" field="lsrq" type="java.util.Date" required="true" />
+            <column number="5" name="商品代码" field="spdm" type="java.lang.Integer" />
+            <column number="6" name="商品型号" field="spxh" type="java.lang.String" required="true" />
+            <column number="7" name="销售台数" field="xsts" type="java.lang.Integer" required="true" />
+            <column number="8" name="用券金额" field="yqje" type="java.lang.Double" required="true"/>
+        </columns>
+    </excel>
+    
+    <excel>
+        <id>DS_FLSB_IMPORT</id>
+        <className>com.skyworth.fl.flsb.vo.DssbdMxVo</className>
+        <startRow>2</startRow>
+        <description>电商返利申报导入</description>
+        <defaultConfig>true</defaultConfig>
+        <redirect>true</redirect>
+        <nextAction>flsb/dsflsb/list</nextAction>
+        <idField>id</idField>
+        <codeField>code</codeField>
+        <columns>
+            <column number="0"  name="产业大类编码"  field="cydlbm" type="java.lang.String" required="true"/>
+            <column number="1"  name="承担客户编号" field="cdkhbh" type="java.lang.String" required="true"/>
+            <column number="2"  name="返利子项"  field="flzx" type="java.lang.String" required="true"/>
+            <column number="3"  name="返利归属开始日" field="dfqjks" type="java.util.Date" required="true"/>
+            <column number="4"  name="返利归属结束日" field="dfqjjs" type="java.util.Date" required="true"/>
+            <column number="5" name="返利金额" field="flje" type="java.lang.Double" required="true"/>
+            <column number="6" name="是否冲销预兑付" field="sfcxydf" type="java.lang.Integer" required="true"/>
+            <column number="7" name="首期摊销金额" field="sqtxje" type="java.lang.Double" required="true"/>
+            <column number="8" name="摊销期" field="txqj" type="java.lang.Integer" required="true"/>
+            <column number="9" name="确认函号" field="qrhh" type="java.lang.String" required="true"/>
+            <column number="10" name="确认函金额" field="qrhje" type="java.lang.Double" required="true"/>
+            <column number="11" name="折让协议单号" field="zrxydh" type="java.lang.String" required="true"/>
+            <column number="12" name="折让协议金额" field="zrxyje" type="java.lang.Double" required="true"/>
+            <column number="13" name="摘要" field="zy" type="java.lang.String" required="true"/>
+        </columns>
+    </excel>
+    <excel>
+        <id>DS_FYSB_IMPORT</id>
+        <className>com.skyworth.fl.flsb.vo.DssbdMxFyVo</className>
+        <startRow>2</startRow>
+        <description>电商费用申报导入</description>
+        <defaultConfig>true</defaultConfig>
+        <redirect>true</redirect>
+        <nextAction>flsb/dsflsb/list</nextAction>
+        <idField>id</idField>
+        <codeField>code</codeField>
+        <columns>
+            <column number="0"  name="产业大类编码"  field="cydlbm" type="java.lang.String" required="true"/>
+            <column number="1"  name="承担客户编号" field="cdkhbh" type="java.lang.String" />
+            <column number="2"  name="返利子项"  field="flzx" type="java.lang.String" required="true"/>
+            <column number="3"  name="返利归属开始日" field="dfqjks" type="java.util.Date" required="true"/>
+            <column number="4"  name="返利归属结束日" field="dfqjjs" type="java.util.Date" required="true"/>
+            <column number="5" name="费用金额" field="flje" type="java.lang.Double" required="true"/>
+            <column number="6" name="是否冲销预兑付" field="sfcxydf" type="java.lang.Integer" required="true"/>
+            <column number="7" name="首期摊销金额" field="sqtxje" type="java.lang.Double" required="true"/>
+            <column number="8" name="摊销期" field="txqj" type="java.lang.Integer" required="true"/>
+            <column number="9" name="税项编码" field="sxbm" type="java.lang.String" required="true"/>
+            <column number="10" name="发票号码" field="fphm" type="java.lang.String" required="true"/>
+            <column number="11" name="不含税金额" field="fyjebhs" type="java.lang.Double" required="true"/>
+            <column number="12" name="可抵扣税金" field="kdkxj" type="java.lang.Double" required="true"/>
+            <column number="13" name="摘要" field="zy" type="java.lang.String" required="true"/>
+            <column number="14" name="B2C零售单号" field="b2clsddh" type="java.lang.String" required="true"/>
+        </columns>
+    </excel>
+    <excel>
+        <id>DS_XHLSB_IMPORT</id>
+        <className>com.skyworth.fl.flsb.vo.DssbdXhlmxVo</className>
+        <startRow>1</startRow>
+        <description>电商型号类申报导入</description>
+        <defaultConfig>true</defaultConfig>
+        <redirect>true</redirect>
+        <nextAction>flsb/dsflsb/list</nextAction>
+        <idField>id</idField>
+        <codeField>code</codeField>
+        <columns>
+			<column number="0"  name="产业大类编码"  field="cydlbm" type="java.lang.String" required="true"/>
+            <column number="1"  name="承担客户编号" field="cdkhbh" type="java.lang.String" required="true"/>
+            <column number="2"  name="返利子项"  field="flzx" type="java.lang.String" required="true"/>
+			<column number="3"  name="商品型号"  field="spxh" type="java.lang.String" required="true"/>
+			<column number="4"  name="数量"  field="lssl" type="java.lang.Integer" required="true"/>
+			<column number="5"  name="库存底价"  field="kcdj" type="java.lang.Double"/>
+			<column number="6"  name="现供价"  field="xgj" type="java.lang.Double"/>
+			<column number="7"  name="零售价"  field="lsj" type="java.lang.Double"/>
+			<column number="8"  name="零售限价"  field="lsxj" type="java.lang.Double"/>
+			<column number="9"  name="固定扣点比率"  field="gdkdbl" type="java.lang.Double"/>
+			<column number="10"  name="已享受返利金额"  field="yxsflje" type="java.lang.Double"/>
+			<column number="11"  name="客户承担金额"  field="khcdje" type="java.lang.Double"/>
+			<column number="12"  name="返利金额"  field="flje" type="java.lang.Double" required="true"/>
+			<column number="13"  name="发生日期"  field="fsrq" type="java.util.Date" required="true"/>
+			<column number="14"  name="结算号"  field="jsh" type="java.lang.String" required="true"/>
+			<column number="15"  name="摘要"  field="zy" type="java.lang.String" required="true"/>
+        </columns>
+    </excel>
+    
+</excel-configuration>

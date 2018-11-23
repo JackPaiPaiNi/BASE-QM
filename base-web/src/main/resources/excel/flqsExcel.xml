@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<excel-configuration>
+    <excel>
+        <id>FLQS_JTBL_IMPORT</id>
+        <className>com.skyworth.fl.flqs.vo.FlqsjtblVo</className>
+        <startRow>2</startRow>
+        <description>返利清算-返利计提比率导入</description>
+        <defaultConfig>true</defaultConfig>
+        <redirect>true</redirect>
+        <nextAction>/flqs/flqsjtbl/list</nextAction>
+        <idField>id</idField>
+        <codeField>code</codeField>
+        <columns>
+        	<column number="0" name="产业大类编码" field="cydlbm" type="java.lang.String" required="true" />
+            <column number="1" name="客户编号" field="khbh" type="java.lang.String" required="true"/>
+            <column number="2" name="客户名称" field="khmc" type="java.lang.String"/>
+            <column number="3" name="兑付形式" field="dfxs" type="java.lang.String" required="true"/>
+            <column number="4" name="返利项目" field="flxm" type="java.lang.String" required="true"/>
+            <column number="5" name="计提比率" field="jtbl" type="java.lang.Double" required="true"/>
+            <column number="6" name="计提开始时间" field="jtsjks" type="java.util.Date" required="true" />
+            <column number="7" name="备注信息" field="bzxx" type="java.lang.String" required="true"/>
+        </columns>
+    </excel>
+
+    <excel>
+        <id>FLQS_JTTZ_IMPORT</id>
+        <className>com.skyworth.fl.flqs.vo.FlqsjttzVo</className>
+        <startRow>2</startRow>
+        <description>返利清算-返利计提调整导入</description>
+        <defaultConfig>true</defaultConfig>
+        <redirect>true</redirect>
+        <nextAction>/flqs/flqsjttz/list</nextAction>
+        <idField>id</idField>
+        <codeField>code</codeField>
+        <columns>
+        	<column number="0" name="产业大类编码" field="cydlbm" type="java.lang.String" required="true" />
+            <column number="1" name="客户编号" field="khbh" type="java.lang.String" required="true"/>
+            <column number="2" name="客户名称" field="khmc" type="java.lang.String"/>
+            <column number="3" name="兑付形式" field="dfxs" type="java.lang.String" required="true"/>
+            <column number="4" name="返利项目" field="flxm" type="java.lang.String"/>
+            <column number="5" name="调整金额" field="tzje" type="java.lang.Double" required="true"/>
+            <column number="6" name="备注信息" field="bzxx" type="java.lang.String" required="true"/>
+        </columns>
+    </excel>
+    
+    <excel>
+        <id>FLQS_FL_SBD_IMPORT</id>
+        <className>com.skyworth.fl.flqs.vo.FlqssbdVo</className>
+        <startRow>2</startRow>
+        <description>返利清算-返利-申报单导入</description>
+        <defaultConfig>true</defaultConfig>
+        <redirect>true</redirect>
+        <nextAction>/flqs/flqssbd/list</nextAction>
+        <idField>id</idField>
+        <codeField>code</codeField>
+        <columns>
+        	<column number="0" name="产业大类编码" field="cydlbm" type="java.lang.String" required="true" />
+            <column number="1" name="承担客户编号" field="cdkhbh" type="java.lang.String" required="true"/>
+            <column number="2" name="承担客户名称" field="cdkhmc" type="java.lang.String"/>
+            <column number="3" name="使用部门编码" field="sybmid" type="java.lang.String" required="true"/>
+            <column number="4" name="使用部门名称" field="sybm" type="java.lang.String"/>
+            <column number="5" name="使用客户编码" field="sykhbh" type="java.lang.String" required="true"/>
+            <column number="6" name="使用客户名称" field="sykhmc" type="java.lang.String"/>
+            <column number="7" name="返利项目" field="flxm" type="java.lang.String" required="true" />
+            <column number="8" name="返利金额" field="fsje" type="java.lang.Double" required="true"/>
+            <column number="9" name="发生日期" field="fsrq" type="java.util.Date" required="true" />
+            <column number="10" name="结算号/协议号" field="jsh" type="java.lang.String" required="true" />
+            <column number="11" name="备注信息" field="bzxx" type="java.lang.String" required="true"/>
+            <column number="12" name="返利子项" field="flzx" type="java.lang.String"/>
+        </columns>
+    </excel>
+    
+    <excel>
+        <id>FLQS_FY_SBD_IMPORT</id>
+        <className>com.skyworth.fl.flqs.vo.FlqssbdVo</className>
+        <startRow>2</startRow>
+        <description>返利清算-费用-申报单导入</description>
+        <defaultConfig>true</defaultConfig>
+        <redirect>true</redirect>
+        <nextAction>/flqs/flqssbd/list</nextAction>
+        <idField>id</idField>
+        <codeField>code</codeField>
+        <columns>
+        	<column number="0" name="产业大类编码" field="cydlbm" type="java.lang.String" required="true" />
+            <column number="1" name="承担客户编号" field="cdkhbh" type="java.lang.String" required="true"/>
+            <column number="2" name="承担客户名称" field="cdkhmc" type="java.lang.String"/>
+            <column number="3" name="使用部门编码" field="sybmid" type="java.lang.String" required="true"/>
+            <column number="4" name="使用部门名称" field="sybm" type="java.lang.String"/>
+            <column number="5" name="使用客户编码" field="sykhbh" type="java.lang.String" required="true"/>
+            <column number="6" name="使用客户名称" field="sykhmc" type="java.lang.String"/> 
+            <column number="7" name="返利项目" field="flxm" type="java.lang.String" required="true" />
+            <column number="8" name="返利金额" field="fsje" type="java.lang.Double" required="true"/>
+            <column number="9" name="发生日期" field="fsrq" type="java.util.Date" required="true" />
+            <column number="10" name="结算号/协议号" field="jsh" type="java.lang.String" required="true" />
+            <column number="11" name="税项编码" field="sxbm" type="java.lang.String" required="true"/>
+            <column number="12" name="发票号码" field="fphm" type="java.lang.String" required="true"/>
+            <column number="13" name="不含税金额" field="fyjebhs" type="java.lang.Double" required="true"/>
+            <column number="14" name="可抵扣税金" field="kdkxj" type="java.lang.Double" required="true"/>
+            <column number="15" name="备注信息" field="bzxx" type="java.lang.String" required="true"/>
+            <column number="16" name="返利子项" field="flzx" type="java.lang.String"/>
+        </columns>
+    </excel>
+</excel-configuration>

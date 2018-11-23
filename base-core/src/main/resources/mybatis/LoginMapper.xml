@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skyworth.core.login.dao.LoginDao">
+
+	<resultMap id="baseResultMap" type="com.skyworth.core.actor.vo.ActorPermissionVo" >
+		<result column="gwid" property="gwid" jdbcType="DECIMAL" />
+		<result column="qxid" property="qxid" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<select id="selectUserByGh" parameterType="Map" statementType="CALLABLE">
+		{call PKG_CORE_LOGIN.GET_YH_BY_GH(
+			#{gh,jdbcType=VARCHAR,mode=IN},
+			#{list,jdbcType=CURSOR,mode=OUT,javaType=ResultSet,resultMap=com.skyworth.core.user.dao.UserDao.baseResultMap})
+		}
+	</select>
+    
+    <select id="selectCd" parameterType="Map" statementType="CALLABLE">
+		{call PKG_CORE_LOGIN.GET_CD(
+			#{sjcdid,jdbcType=DECIMAL,mode=IN},
+			#{gh,jdbcType=VARCHAR,mode=IN},
+			<!-- #{gwid,jdbcType=DECIMAL,mode=IN}, -->
+			#{list,jdbcType=CURSOR,mode=OUT,javaType=ResultSet,resultMap=com.skyworth.core.menu.dao.MenuDao.baseResultMap})
+		}
+	</select>
+    
+	<select id="selectQx" parameterType="Map" statementType="CALLABLE">
+		{call PKG_CORE_LOGIN.GET_QX(
+			#{gh,jdbcType=VARCHAR,mode=IN},
+			<!-- #{gwid,jdbcType=DECIMAL,mode=IN}, -->
+			#{list,jdbcType=CURSOR,mode=OUT,javaType=ResultSet,resultMap=com.skyworth.core.login.dao.LoginDao.baseResultMap})
+		}
+	</select>
+	
+	<select id="selectSession" parameterType="Map" statementType="CALLABLE">
+		{call PKG_CORE_LOGIN.GET_SESSION(
+			#{gh,jdbcType=VARCHAR,mode=IN},
+			<!-- #{gwid,jdbcType=DECIMAL,mode=IN}, -->
+			#{actorList,jdbcType=CURSOR,mode=OUT,javaType=ResultSet,resultMap=com.skyworth.core.actor.dao.ActorDao.baseResultMap},
+			#{viewOrgList,jdbcType=VARCHAR,mode=OUT},
+			#{operOrgList,jdbcType=VARCHAR,mode=OUT})
+		}
+	</select>
+    
+</mapper>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skyworth.core.menu.dao.MenuDao">
+
+	<resultMap id="baseResultMap" type="com.skyworth.core.menu.vo.MenuVo" >
+	
+		<result column="id" property="id" jdbcType="INTEGER" />
+		<result column="cd" property="cd" jdbcType="VARCHAR" />
+		<result column="sjcdid" property="sjcdid" jdbcType="INTEGER" />
+		<result column="sjcd" property="sjcd" jdbcType="VARCHAR" />
+		<result column="sfmj" property="sfmj" jdbcType="INTEGER" />
+		<result column="xh" property="xh" jdbcType="VARCHAR" />
+		<result column="ljdz" property="ljdz" jdbcType="VARCHAR" />
+		<result column="sfbkzqx" property="sfbkzqx" jdbcType="INTEGER" />
+		<result column="zt" property="zt" jdbcType="INTEGER" />
+		<result column="tb" property="tb" jdbcType="VARCHAR" />
+		<result column="level" property="level" jdbcType="INTEGER" />
+		<result column="checked" property="checked" jdbcType="INTEGER" />
+		<result column="lx" property="lx" jdbcType="INTEGER" />
+		<result column="isXtcd" property="isXtcd" jdbcType="INTEGER" />
+
+	</resultMap>
+	
+	<select id="selectById" parameterType="Map" statementType="CALLABLE">
+		{call PKG_CORE_MENU.P_QRY_MENU_BY_ID(
+			#{id,jdbcType=INTEGER,mode=IN},
+			#{list,jdbcType=CURSOR,mode=OUT,javaType=ResultSet,resultMap=com.skyworth.core.menu.dao.MenuDao.baseResultMap})
+		}
+	</select>
+    
+	<select id="select" parameterType="Map" statementType="CALLABLE">
+		{call PKG_CORE_MENU.P_QRY_MENU(
+			#{vo.cd,jdbcType=VARCHAR,mode=IN},
+			#{vo.zt,jdbcType=INTEGER,mode=IN},
+			#{vo.isXtcd,jdbcType=INTEGER,mode=IN},
+			#{page.page,jdbcType=INTEGER,mode=IN},
+			#{page.rows,jdbcType=INTEGER,mode=IN},
+			#{page.sort,jdbcType=VARCHAR,mode=IN},
+			#{page.order,jdbcType=VARCHAR,mode=IN},
+			#{total,jdbcType=INTEGER,mode=OUT},
+			#{list,jdbcType=CURSOR,mode=OUT,javaType=ResultSet,resultMap=com.skyworth.core.menu.dao.MenuDao.baseResultMap})
+		}
+	</select>
+	
+	<update id="save" parameterType="Map" statementType="CALLABLE">
+		<!-- 当参数类型为IN OUT时，mode=INOUT -->
+		{call PKG_CORE_MENU.P_SAVE_MENU(
+			#{vo.id,jdbcType=VARCHAR,mode=INOUT},
+			#{vo.cd,jdbcType=VARCHAR,mode=IN},
+			#{vo.sjcdid,jdbcType=INTEGER,mode=IN},
+			#{vo.xh,jdbcType=VARCHAR,mode=IN},
+			#{vo.ljdz,jdbcType=VARCHAR,mode=IN},
+			#{vo.sfbkzqx,jdbcType=INTEGER,mode=IN},
+			#{vo.zt,jdbcType=INTEGER,mode=IN},
+			#{vo.tb,jdbcType=VARCHAR,mode=IN},
+			#{resultCode,jdbcType=VARCHAR,mode=OUT},
+			#{resultMsg,jdbcType=VARCHAR,mode=OUT}
+		)}
+	</update>
+	
+	<delete id="delete" parameterType="Map" statementType="CALLABLE">
+		{call PKG_CORE_MENU.P_DELETE_MENU(
+			#{vo.id,jdbcType=INTEGER,mode=IN},
+			#{resultCode,jdbcType=VARCHAR,mode=OUT},
+			#{resultMsg,jdbcType=VARCHAR,mode=OUT}
+		)}
+	</delete>
+    
+</mapper>

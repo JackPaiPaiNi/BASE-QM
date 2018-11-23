@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:aop="http://www.springframework.org/schema/aop"
+		xmlns:tx="http://www.springframework.org/schema/tx"
+		xmlns:context="http://www.springframework.org/schema/context"
+		xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+        <property name="connectionFactory" ref="jedisConnectionFactory"/>
+        <property name="keySerializer">
+			<bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+		</property>
+        <!-- 值序列化方式 -->
+        <property name="valueSerializer">
+			<bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>
+        </property>
+        <property name="hashKeySerializer">
+           <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+        </property>
+        <property name="hashValueSerializer">
+			<bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>
+        </property>
+    </bean>
+
+    <bean id="redisTemplateJson" class="org.springframework.data.redis.core.RedisTemplate">
+        <property name="connectionFactory" ref="jedisConnectionFactory"/>
+        <property name="keySerializer">
+			<bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+		</property>
+        <!-- 值序列化方式 -->
+        <property name="valueSerializer">
+            <bean class="org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer"/>
+        </property>
+        <property name="hashKeySerializer">
+           <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+        </property>
+        <property name="hashValueSerializer">
+            <bean class="org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer"/>
+        </property>
+    </bean>
+    
+    <!-- redis单节点数据库连接配置 -->
+	<!-- <bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+		<property name="hostName" value="${redis.ip}" />
+		<property name="port" value="${redis.port}" />
+		<property name="poolConfig" ref="jedisPoolConfig" />
+	</bean>  -->
+	
+	<!-- #redisCluster集群节点数据库连接配置 -->
+    <bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+        <constructor-arg ref="redisClusterConfiguration"/>
+        <constructor-arg ref="jedisPoolConfig"/>
+    </bean>
+
+    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+    	<!-- 最大空闲数 -->
+        <property name="maxIdle" value="100"/>
+        <!-- 最小空闲数 -->
+        <property name="minIdle" value="8"/>
+        <!-- 最大连接数 -->
+        <property name="maxTotal" value="1024"/>
+        <!-- 最大建立连接等待时间（毫秒） -->
+        <property name="maxWaitMillis" value="1000"/>
+        <!-- 是否提前进行alidate操作,如果为true,则得到的jedis实例均是可用的 -->
+        <property name="testOnBorrow" value="true"/>
+    </bean>
+
+    <bean id="redisClusterConfiguration" class="org.springframework.data.redis.connection.RedisClusterConfiguration">
+    	<!-- redis集群单位数 -->
+        <property name="maxRedirects" value="6"></property>
+        <!-- redisCluster集群节点 -->
+        <property name="clusterNodes">
+            <set>
+                <bean class="org.springframework.data.redis.connection.RedisClusterNode">
+                    <constructor-arg name="host" value="172.20.212.51" />
+                    <constructor-arg name="port" value="9901" />
+                </bean>
+                <bean class="org.springframework.data.redis.connection.RedisClusterNode">
+                    <constructor-arg name="host" value="172.20.212.51" />
+                    <constructor-arg name="port" value="9902" />
+                </bean>
+                <bean class="org.springframework.data.redis.connection.RedisClusterNode">
+                    <constructor-arg name="host" value="172.20.212.51" />
+                    <constructor-arg name="port" value="9903" />
+                </bean>
+                <bean class="org.springframework.data.redis.connection.RedisClusterNode">
+                    <constructor-arg name="host" value="172.20.212.51" />
+                    <constructor-arg name="port" value="9904" />
+                </bean>
+                <bean class="org.springframework.data.redis.connection.RedisClusterNode">
+                    <constructor-arg name="host" value="172.20.212.51" />
+                    <constructor-arg name="port" value="9905" />
+                </bean>
+                <bean class="org.springframework.data.redis.connection.RedisClusterNode">
+                    <constructor-arg name="host" value="172.20.212.51" />
+                    <constructor-arg name="port" value="9906" />
+                </bean>
+            </set>
+        </property>
+    </bean>
+	
+	<!-- 缓存注解理器 -->  
+	<bean id="cacheManager" class="org.springframework.data.redis.cache.RedisCacheManager">
+		<constructor-arg name="redisOperations" ref="redisTemplateJson" />
+		<property name="usePrefix" value="true" />
+		<property name="cachePrefix">
+            <bean class="com.skyworth.core.redis.RedisCachePerfixGenerate">
+				<!-- 系统名 -->
+				<constructor-arg name="prefix" value="CWBB"/>
+				<!-- 缓存key分隔符 -->
+				<constructor-arg name="delimiter" value=":"/>
+            </bean>
+        </property>
+        <!-- 1周。 0 永不过期，单位（秒）-->
+		<property name="defaultExpiration" value="864000" />
+	</bean>
+
+	<!-- shiro扩展缓存管理器 -->
+	<bean id="shiroCacheManager" class="com.skyworth.core.redis.shiro.RedisShiroCacheManager">
+		<property name="redisTemplate" ref="redisTemplate"/>
+		<!-- 系统名 -->
+		<property name="prefix" value="CWBB"/>
+		<!-- 缓存key分隔符 -->
+		<property name="delimiter" value=":"/>
+		<!-- 1小时。 0 永不过期，单位（秒）-->
+		<property name="defaultExpiration" value="3600" />
+	</bean> 
+	
+	<!-- shiro 会话DAO -->
+	<bean id="sessionDAO" class="com.skyworth.core.redis.shiro.RedisShiroSessionDao">
+		<property name="redisTemplate" ref="redisTemplate"/>
+		<property name="name" value="sessionCache"/>
+		<!-- 系统名 -->
+		<property name="prefix" value="CWBB"/>		
+		<!-- 缓存key分隔符 -->
+		<property name="delimiter" value=":"/>
+		<!-- 1小时。 0 永不过期，单位（秒）-->
+		<property name="defaultExpiration" value="3600" />
+	</bean>
+
+</beans>

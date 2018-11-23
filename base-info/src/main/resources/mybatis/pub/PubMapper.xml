@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skyworth.bi.pub.dao.PubDao">
+
+	<resultMap id="bmResultMap" type="com.skyworth.bi.pub.vo.PubBmVo" >
+		<result column="bmid" property="bmid" jdbcType="VARCHAR" />
+		<result column="bm" property="bm" jdbcType="VARCHAR" />
+		<result column="cwgs" property="cwgs" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	
+	<select id="selectBmAll" parameterType="Map" statementType="CALLABLE">
+		{call PKG_PUB.GET_ALLBM(
+			#{list,jdbcType=CURSOR,mode=OUT,javaType=ResultSet,resultMap=com.skyworth.bi.pub.dao.PubDao.bmResultMap})
+		}
+	</select>
+	
+	<select id="selectBm" parameterType="Map" statementType="CALLABLE">
+		{call PKG_PUB.GET_KCXBM(
+			#{vo.usercode,jdbcType=VARCHAR,mode=IN},
+			#{vo.bmjcdm,jdbcType=VARCHAR,mode=IN},
+			#{vo.timestamp,jdbcType=VARCHAR,mode=INOUT},
+			#{list,jdbcType=CURSOR,mode=OUT,javaType=ResultSet,resultMap=com.skyworth.bi.pub.dao.PubDao.bmResultMap})
+		}
+	</select>
+	
+	
+</mapper>
